@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Nkuli.Models.Student>
+@{
+    ViewData["Title"] = "Index";
+}
+<div style="margin-bottom:20px">
+    <a asp-action="Create" class="btn btn-success">Create student</a>
+    <form class="float-right" method="post" asp-action="Index">
+        <input placeholder="Search value" name="searchValue" />
+        <select name="searchColunm">
+            <option value="">Search by</option>
+            <option value="Id">Id</option>
+            <option value="Name">Name</option>
+            <option value="Surname">Surname</option>
+        </select>
+        <input type="submit" class="btn btn-primary" name="Search" value="Search">
+    </form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Surname", "Index", new { sortOrder = ViewBag.SurnameSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("SchoolName", "Index", new { sortOrder = ViewBag.SchoolNameSortParm})
+            </th>
+           
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SchoolName)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbod
